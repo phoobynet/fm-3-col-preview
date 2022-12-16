@@ -12,34 +12,78 @@ $transparent-white: hsl(0deg 0% 100% / 75%);
 $very-light-gray: hsl(0deg 0% 95%);
 
 // Typography
-.font-normal {
+@mixin font-normal {
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 400;
 }
 
-.font-bold {
+@mixin font-bold {
   font-family: 'Big Shoulders Display', sans-serif;
   font-weight: 700;
 }
 
 body {
+  display: flex;
+  place-content: center;
   font-size: 0.938rem;
+  min-height: 1502px;
 }
 
 .cards {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
-  place-items: center;
+  grid-row-gap: -1rem;
+  justify-items: center;
+  align-content: start;
+  margin-top: 5.5rem;
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 0;
-    max-width: 1500px;
+    max-width: calc(307px * 3);
   }
 
   .card {
     width: 327px;
     height: 442px;
+    border-radius: 0.5rem;
+    padding: 3rem 3rem 0;
+    display: grid;
+    grid-template-rows: 4.3rem 4.9rem 9.4rem 1fr;
+
+    h2 {
+      @include font-bold;
+
+      font-size: 40px;
+      color: $very-light-gray;
+      text-transform: uppercase;
+    }
+
+    p {
+      @include font-normal;
+
+      color: $transparent-white;
+      line-height: 25px;
+    }
+
+    button {
+      @include font-normal;
+
+      cursor: pointer;
+      border-radius: 2rem;
+      background-color: $very-light-gray;
+      padding: 0.7rem 0.9rem;
+      height: 1.3rem;
+      line-height: 1rem;
+      letter-spacing: 0;
+      width: 7.2rem;
+      text-align: center;
+      border: 2px solid $very-light-gray;
+
+      &:hover {
+        color: $very-light-gray;
+      }
+    }
 
     @media (min-width: 1440px) {
       width: 307px;
@@ -48,14 +92,26 @@ body {
 
     &#sedans {
       background-color: $bright-orange;
+
+      button {
+        color: $bright-orange;
+      }
     }
 
     &#suvs {
       background-color: $dark-cyan;
+
+      button {
+        color: $dark-cyan;
+      }
     }
 
     &#luxury {
       background-color: $very-dark-cyan;
+
+      button {
+        color: $very-dark-cyan;
+      }
     }
   }
 }
