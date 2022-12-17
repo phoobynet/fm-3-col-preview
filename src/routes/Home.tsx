@@ -5,7 +5,7 @@ import iconSuvs from '@/assets/images/icon-suvs.svg'
 export default function Home() {
   return (
     <div className="cards">
-      <div
+      <article
         id="sedans"
         className="card"
       >
@@ -21,8 +21,8 @@ export default function Home() {
         <div>
           <button>Learn More</button>
         </div>
-      </div>
-      <div
+      </article>
+      <article
         id="suvs"
         className="card"
       >
@@ -38,8 +38,8 @@ export default function Home() {
         <div>
           <button>Learn More</button>
         </div>
-      </div>
-      <div
+      </article>
+      <article
         id="luxury"
         className="card"
       >
@@ -53,7 +53,7 @@ export default function Home() {
           enhanced comfort of a luxury rental and arrive in style.
         </p>
         <button>Learn More</button>
-      </div>
+      </article>
     </div>
   )
 }

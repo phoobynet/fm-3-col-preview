@@ -1,3 +1,4 @@
+@use 'sass:list';
 @import './reset';
 
 // Colors
@@ -11,6 +12,15 @@ $very-dark-cyan: hsl(179deg 100% 13%);
 $transparent-white: hsl(0deg 0% 100% / 75%);
 $very-light-gray: hsl(0deg 0% 95%);
 
+// Card
+$card-width-mobile: 20.438rem;
+$card-height-mobile: 27.625rem;
+$card-width-desktop: 19.188rem;
+$card-height-desktop: 31.25rem;
+$card-overlap-margin: -1.5rem;
+$card-border-radius: 0.5rem;
+$card-color-order: $bright-orange, $dark-cyan, $very-dark-cyan;
+
 // Typography
 @mixin font-normal {
   font-family: 'Lexend Deca', sans-serif;
@@ -22,40 +32,86 @@ $very-light-gray: hsl(0deg 0% 95%);
   font-weight: 700;
 }
 
+@mixin card($color, $index) {
+  background-color: $color;
+
+  @if $index == 1 {
+    border-top-left-radius: $card-border-radius;
+    border-top-right-radius: $card-border-radius;
+  }
+
+  @if $index == 3 {
+    border-bottom-right-radius: $card-border-radius;
+    border-bottom-left-radius: $card-border-radius;
+  }
+
+  @media (min-width: 1440px) {
+    @if $index == 1 {
+      border-top-left-radius: $card-border-radius;
+      border-top-right-radius: unset;
+      border-bottom-left-radius: $card-border-radius;
+    }
+
+    @if $index == 3 {
+      border-top-right-radius: $card-border-radius;
+      border-bottom-right-radius: $card-border-radius;
+      border-bottom-left-radius: unset;
+    }
+  }
+
+  button {
+    color: $color;
+
+    &:hover {
+      background-color: $color;
+      color: $very-light-gray;
+    }
+  }
+}
+
 body {
   display: flex;
-  place-content: center;
+  height: 100vh;
   font-size: 0.938rem;
-  min-height: 1502px;
+  place-content: center;
 }
 
 .cards {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
-  grid-row-gap: -1rem;
   justify-items: center;
   align-content: start;
   margin-top: 5.5rem;
 
   @media (min-width: 1440px) {
-    grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 0;
-    max-width: calc(307px * 3);
+    grid-template-columns: repeat(3, 1fr);
+    max-width: calc($card-width-desktop * 3);
   }
 
   .card {
-    width: 327px;
-    height: 442px;
-    border-radius: 0.5rem;
-    padding: 3rem 3rem 0;
     display: grid;
     grid-template-rows: 4.3rem 4.9rem 9.4rem 1fr;
+    width: $card-width-mobile;
+    height: $card-height-mobile;
+    padding: 3rem 3rem 0;
+
+    @media (min-width: 1440px) {
+      width: $card-width-desktop;
+      height: $card-height-desktop;
+    }
+
+    @for $i from 1 through list.length($card-color-order) {
+      &:nth-child(#{$i}) {
+        @include card(nth($card-color-order, $i), $i);
+      }
+    }
 
     h2 {
       @include font-bold;
 
-      font-size: 40px;
       color: $very-light-gray;
+      font-size: 2.5rem;
       text-transform: uppercase;
     }
 
@@ -63,55 +119,22 @@ body {
       @include font-normal;
 
       color: $transparent-white;
-      line-height: 25px;
+      line-height: 1.563rem;
     }
 
     button {
       @include font-normal;
 
-      cursor: pointer;
+      width: 7.2rem;
+      height: 1.3rem;
+      padding: 0.7rem 0.9rem;
+      border: 0.125rem solid $very-light-gray;
       border-radius: 2rem;
       background-color: $very-light-gray;
-      padding: 0.7rem 0.9rem;
-      height: 1.3rem;
-      line-height: 1rem;
       letter-spacing: 0;
-      width: 7.2rem;
+      line-height: 1rem;
       text-align: center;
-      border: 2px solid $very-light-gray;
-
-      &:hover {
-        color: $very-light-gray;
-      }
-    }
-
-    @media (min-width: 1440px) {
-      width: 307px;
-      height: 500px;
-    }
-
-    &#sedans {
-      background-color: $bright-orange;
-
-      button {
-        color: $bright-orange;
-      }
-    }
-
-    &#suvs {
-      background-color: $dark-cyan;
-
-      button {
-        color: $dark-cyan;
-      }
-    }
-
-    &#luxury {
-      background-color: $very-dark-cyan;
-
-      button {
-        color: $very-dark-cyan;
-      }
+      cursor: pointer;
     }
   }
 }
