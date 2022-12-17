@@ -1,0 +1,16 @@
+@import '@/assets/styles/variables';
+
+.cards {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  justify-items: center;
+  align-content: start;
+  margin-top: 5.5rem;
+  padding-bottom: 5.5rem;
+
+  @media (min-width: 1440px) {
+    grid-column-gap: 0;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: calc($card-width-desktop * 3);
+  }
+}

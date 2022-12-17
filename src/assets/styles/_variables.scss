@@ -1,0 +1,25 @@
+// Colors
+
+// Background
+
+$background: hsl(0deg 0% 95%);
+
+// Primary
+$bright-orange: hsl(31deg 77% 52%);
+$dark-cyan: hsl(184deg 100% 22%);
+$very-dark-cyan: hsl(179deg 100% 13%);
+
+// Neutral
+$transparent-white: hsl(0deg 0% 100% / 75%);
+$very-light-gray: hsl(0deg 0% 95%);
+
+// Cards
+$card-width-mobile: 20.438rem;
+$card-height-mobile: 27.625rem;
+$card-width-desktop: 19.188rem;
+$card-height-desktop: 31.25rem;
+$card-overlap-margin: -1.5rem;
+$card-border-radius: 0.5rem;
+
+// TODO: Fragile code
+$card-color-order: $bright-orange, $dark-cyan, $very-dark-cyan;
