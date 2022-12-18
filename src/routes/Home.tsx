@@ -26,5 +26,9 @@ const cards: CardOptions[] = [
 ]
 
 export default function Home() {
-  return <Cards cards={cards} />
+  return (
+    <main>
+      <Cards cards={cards} />
+    </main>
+  )
 }
